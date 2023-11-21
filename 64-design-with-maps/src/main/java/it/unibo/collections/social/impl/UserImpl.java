@@ -22,16 +22,16 @@ public class UserImpl implements User {
     private int hash;
 
     /**
-     * Builds a new UserImpl. An age not specified means that the age field is
-     * going to have a value equal to -1.
-     * 
-     * @param name
-     *            the user firstname
-     * @param surname
-     *            the user lastname
-     * @param user
-     *            alias of the user, i.e. the way a user is identified on an
-     *            application
+     * Crea un nuovo UserImpl. Un'età non specificata significa che il campo età lo è
+     * avrà un valore pari a -1.
+     *
+     * @nomeparam
+     * il nome dell'utente
+     *Cognome @param
+     * il cognome dell'utente
+     * Utente @param
+     *alias dell'utente, ovvero il modo in cui un utente viene identificato su un
+     *            applicazione
      */
     public UserImpl(final String name, final String surname, final String user) {
         this(name, surname, user, -1);

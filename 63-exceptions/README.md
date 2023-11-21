@@ -1,45 +1,44 @@
 # Exceptions playground
 
 ### Check arguments correctness and throw RuntimeExceptions
+All'interno del costruttore `ServiceBehindUnstableNetwork(double, int)`,
+aggiungi un controllo che la probabilità sia compresa tra 0 (inclusa) e 1 (esclusa).
+Se il controllo fallisce, deve lanciare una `IllegalArgumentException` con un messaggio appropriato.
 
-Inside the constructor `ServiceBehindUnstableNetwork(double, int)`,
-add a check that the probability is within 0 (included) and 1 (excluded).
-If the check fails, it must throw an `IllegalArgumentException` with an appropriate message.
+### Rileva le eccezioni esistenti
 
-### Catch existing exceptions
+Implementare i metodi `UseArithmeticService.retrySendOnNetworkError`
+e "UseArithmeticService.retryReceiveOnNetworkError".
+come descritto nel codice sorgente.
 
-Implement the methods `UseArithmeticService.retrySendOnNetworkError`
-and `UseArithmeticService.retryReceiveOnNetworkError`
-as described in the source code.
+### Progetta nuove eccezioni
 
-### Design new exceptions
+Crea una `NetworkException estende IOException` con due costruttori.
+Il costruttore 0-ary deve creare un'eccezione il cui messaggio è "Errore di rete: nessuna risposta".
+Il costruttore 1-ary deve prendere una String come input e creare un messaggio "Errore di rete durante l'invio del messaggio: <message>"
 
-Create a `NetworkException extends IOException` with two constructors.
-The 0-ary constructor must create an Exception whose message is "Network error: no response".
-The 1-ary constructor must take a String as input, and create a message "Network error while sending message: <message>"
+Modifica "ServiceBehindUnstableNetwork.accessTheNetwork()".
+in modo tale da lanciare la nuova Exception.
+Tieni presente che i blocchi che rilevavano "IOException" funzionano ancora.
 
-Modify `ServiceBehindUnstableNetwork.accessTheNetwork()`
-in such a way that it throws the new Exception.
-Notice that the blocks that used to catch `IOException` still work.
+### Controlla la correttezza degli argomenti e preserva lo stacktrace sui rethrow
 
-### Check the arguments' correctness and preserve the stacktrace on rethrows
+Modifica `ServiceBehindUnstableNetwork.sendData` in modo tale che,
+invece di stampare, lancia un'IllegalArgumentException con lo stesso messaggio.
 
-Modify `ServiceBehindUnstableNetwork.sendData` in such a way that,
-instead of printing, throws an IllegalArgumentException with the same message.
+**Nota:** l'eccezione appena lanciata deve *preservare* lo stacktrace dell'originale
+`NumberFormatException` (che deve essere impostato come causa dell'eccezione).
 
-**Note:** the newly thrown exception must *preserve* the stacktrace of the original
-`NumberFormatException` (which must be set as exception cause).
+### Utilizza le eccezioni per contrassegnare lo stato eccezionale
 
-### Use exceptions to mark exceptional state
+Rimuovi tutti i `println` da `ArithmeticService`: quando il sistema entra in uno stato incoerente,
+dovrebbe essere lanciata una `IllegalStateException` con lo stesso messaggio della stampa.
+Ricordarsi di preservare lo stacktrace delle eccezioni della causa, se presenti.
 
-Remove all `println`s from `ArithmeticService`: when the system enters an inconsistent state,
-an `IllegalStateException` with the same message of the print should be thrown.
-Remember to preserve the stacktrace of the cause exceptions if there is any.
+### Utilizza `finally` per calcolare anche dopo il `return`
 
-### Use `finally` to compute even after the `return`
+Modifica `ArithmeticService.process()`:
+non importa cosa, una volta che il flusso di controllo esce dal metodo,
+È necessario eseguire `commandQueue.clear()`.
 
-Modify `ArithmeticService.process()`:
-no matter what, once the control flow exits the method,
-`commandQueue.clear()` must be executed.
-
-Suggestion: use `finally` appropriately.
+Suggerimento: utilizzare `finalmente` in modo appropriato.

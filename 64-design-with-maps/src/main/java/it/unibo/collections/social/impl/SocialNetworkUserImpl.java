@@ -29,46 +29,45 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
 
     /*
      *
-     * [FIELDS]
+     * [CAMPI]
      *
-     * Define any necessary field
+     * Definire qualsiasi campo necessario
      *
-     * In order to save the people followed by a user organized in groups, adopt
-     * a generic-type Map:  think of what type of keys and values would best suit the requirements
+     * Per salvare le persone seguite da un utente organizzato in gruppi, adotta
+     * una mappa di tipo generico: pensare a quale tipo di chiavi e valori si adatterebbero meglio ai requisiti
      */
 
     /*
-     * [CONSTRUCTORS]
+     * [COSTRUTTORI]
      *
-     * 1) Complete the definition of the constructor below, for building a user
-     * participating in a social network, with 4 parameters, initializing:
+     * 1) Completa la definizione del costruttore di seguito, per creare un utente
+     * partecipazione ad un social network, con 4 parametri, inizializzando:
      *
-     * - firstName
-     * - lastName
-     * - username
-     * - age and every other necessary field
+     * - nome di battesimo
+     * - cognome
+     * - nome utente
+     * - età ed ogni altro campo necessario
      */
     /**
-     * Builds a user participating in a social network.
+     * Costruisce un utente che partecipa a un social network.
      *
-     * @param name
-     *            the user firstname
-     * @param surname
-     *            the user lastname
+     * @nomeparam
+     * il nome dell'utente
+     *Cognome @param
+     * il cognome dell'utente
      * @param userAge
-     *            user's age
-     * @param user
-     *            alias of the user, i.e. the way a user is identified on an
-     *            application
+     *età dell'utente
+     * Utente @param
+     *alias dell'utente, ovvero il modo in cui un utente viene identificato su un
+     *            applicazione
      */
     public SocialNetworkUserImpl(final String name, final String surname, final String user, final int userAge) {
         super(null, null, null, 0);
     }
 
     /*
-     * 2) Define a further constructor where the age defaults to -1
+     * 2) Definire un ulteriore costruttore in cui l'età predefinita è -1
      */
-
     /*
      * [METHODS]
      *
@@ -81,8 +80,8 @@ public final class SocialNetworkUserImpl<U extends User> extends UserImpl implem
 
     /**
      *
-     * [NOTE] If no group with groupName exists yet, this implementation must
-     * return an empty Collection.
+     * [NOTA] Se non esiste ancora alcun gruppo con groupName, questa implementazione deve
+     * restituisce una raccolta vuota.
      */
     @Override
     public Collection<U> getFollowedUsersInGroup(final String groupName) {
