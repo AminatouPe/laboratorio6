@@ -13,33 +13,34 @@ import java.util.List;
 public interface SocialNetworkUser<U extends User> extends User {
 
     /**
-     * Adds a friend to the list of this user's current friends.
-     * 
-     * @param group
-     *            the group (circle) on which the user in going to be added
-     * @param user
-     *            the user to be added as a user followed
-     * @return true if the user to be added as a followed person does not exist
-     *         yet, false otherwise
+     Aggiunge un amico all'elenco degli amici attuali di questo utente.
+     *
+     * Gruppo @param
+     * il gruppo (cerchio) a cui verrà aggiunto l'utente
+     * Utente @param
+     *l'utente da aggiungere come utente seguito
+     * @return true se l'utente da aggiungere come persona seguita non esiste
+     * eppure, falso altrimenti
      */
     boolean addFollowedUser(String group, U user);
 
     /**
-     * Gets the list of every person followed by this user disregarding the
-     * group.
-     * 
-     * @return the list of people followed by this user among all her groups
+     Ottiene l'elenco di tutte le persone seguite da questo utente ignorando il file
+     *gruppo.
+     *
+     * @return l'elenco delle persone seguite da questo utente tra tutti i suoi gruppi
      */
     List<U> getFollowedUsers();
 
     /**
-     * Gets the list of followed people belonging to a given group.
-     * 
+     Ottiene l'elenco delle persone seguite appartenenti a un determinato gruppo.
+     *
      * @param groupName
-     *            the name of the group
-     * @return the collection of people followed by this user within group
+     *            il nome del gruppo
+     * @return la raccolta di persone seguite da questo utente all'interno del gruppo
      *         "groupName".
      */
+
     Collection<U> getFollowedUsersInGroup(String groupName);
 
 }
